@@ -1,0 +1,36 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# HTTP(S)
+http:
+  base_url: !secret base_url
+  ssl_certificate: !secret ssl_cert
+  ssl_key: !secret ssl_key
+  ip_ban_enabled: true
+  login_attempts_threshold: 3
+
+# Device tracker
+device_tracker:
+  - platform: tomato
+    host: 192.168.1.1
+    http_id: !secret tomato_http_id
+    username: !secret tomato_username
+    password:  !secret tomato_password
+    verify_ssl: false
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+# Weather
+weather:
+  - platform: buienradar
+
+camera:
+  - platform: buienradar
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
